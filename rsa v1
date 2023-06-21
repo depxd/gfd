@@ -18,25 +18,19 @@ namespace RSA_v1
         {
             InitializeComponent();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             int q = int.Parse(textBox1.Text);
             int p = int.Parse(textBox2.Text);
             int n = q * p;
             int fi = (q - 1) * (p - 1);
-                                  
-            richTextBox1.Text = "Введите простое число e = " + "\n n = " + n + "\n Функция Эйлера fi = " + fi + "\n" ;
-            
+            richTextBox1.Text =  "\n n = " + n + "\n Функция Эйлера fi = " + fi + "\n" ;
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
-
         private void button2_Click(object sender, EventArgs e)
-
         {
             int q = int.Parse(textBox1.Text);
             int p = int.Parse(textBox2.Text);
@@ -60,30 +54,30 @@ namespace RSA_v1
                 richTextBox2.Text = "Число не простое";
 
             }
-
         }
-
         private async void button3_Click(object sender, EventArgs e)
         {
             int q = int.Parse(textBox1.Text);
             int p = int.Parse(textBox2.Text);
             int n = q * p;
             int fi = (q - 1) * (p - 1);
-            int d = int.Parse(textBox4.Text);
+            //int d = int.Parse(textBox4.Text);
             int E = int.Parse(textBox3.Text);
-            int k = (d * E) % fi;
-
-            if (k == 1)
+            for (int h = 1; h <= 5; h++)
             {
-                richTextBox3.Text = "Закрытый ключ " + d + ", " + n;
+                int i = E + fi * h;
+                int k = (i * E) % fi;
+                if (k == 1)
+                {
+                    richTextBox3.Text = "Закрытый ключ " + i + ", " + n;
+                }
+                else
+                {
+                    richTextBox3.Text = "Неверное число d";
+                }
             }
-            else
-            {
-                richTextBox3.Text = "Неверное число d";
-            }
-
+           
         }
-
         private void button4_Click(object sender, EventArgs e)
         {
             int q = int.Parse(textBox1.Text);
@@ -91,10 +85,8 @@ namespace RSA_v1
             int n = q * p;
             int E = int.Parse(textBox3.Text);
             int P = int.Parse(textBox5.Text);
-            BigInteger numeric = P;
             richTextBox4.Text = "Зашифрованое собщение  " + BigInteger.Pow(P, E) % n ;
         }
-
         private void button5_Click(object sender, EventArgs e)
         {
             int q = int.Parse(textBox1.Text);
@@ -105,5 +97,10 @@ namespace RSA_v1
             richTextBox5.Text = "Расшифрованое собщение  " + BigInteger.Pow(c, d) % n; ;
         }
 
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
