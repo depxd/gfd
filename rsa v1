@@ -28,7 +28,6 @@ namespace RSA_v1
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -52,7 +51,6 @@ namespace RSA_v1
             else 
             {
                 richTextBox2.Text = "Число не простое";
-
             }
         }
         private async void button3_Click(object sender, EventArgs e)
@@ -63,7 +61,7 @@ namespace RSA_v1
             int fi = (q - 1) * (p - 1);
             //int d = int.Parse(textBox4.Text);
             int E = int.Parse(textBox3.Text);
-            for (int h = 1; h <= 5; h++)
+            for (int h = 1; h <= 3; h++)
             {
                 int i = E + fi * h;
                 int k = (i * E) % fi;
@@ -74,9 +72,8 @@ namespace RSA_v1
                 else
                 {
                     richTextBox3.Text = "Неверное число d";
-                }
-            }
-           
+                }              
+            }        
         }
         private void button4_Click(object sender, EventArgs e)
         {
@@ -96,11 +93,9 @@ namespace RSA_v1
             int d = int.Parse(textBox4.Text);
             richTextBox5.Text = "Расшифрованое собщение  " + BigInteger.Pow(c, d) % n; ;
         }
-
         private void label6_Click(object sender, EventArgs e)
         {
 
         }
     }
 }
-
