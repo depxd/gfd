@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace PRACTICA_VAR_1
 {
+   
     public partial class Form1 : Form
     {
         public Form1()
@@ -51,8 +52,16 @@ namespace PRACTICA_VAR_1
             double A = Math.Pow(g, a) % p;
             double B = Math.Pow(g, b) % p;
             double k = Math.Pow(g, a * b) % p;
-            richTextBox1.Text = "Результат вычисления"+"\n A = " + A + "\n B = " + B + "\n Общий секретный ключ" + "\n K = " + k;
-       
+            double ka = Math.Pow(B, a) % p;
+            double kb = Math.Pow(A, b) % p;
+            if (ka == kb)
+            {
+                richTextBox1.Text = "Результат вычисления" + "\n A = " + A + "\n B = " + B + "\n Общий секретный ключ" + "\n K = " + k;
+            }
+            else
+            {
+                richTextBox1.Text = "error";
+            }
         }
 
         private void textBox7_TextChanged(object sender, EventArgs e)
