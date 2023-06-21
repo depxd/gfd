@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Numerics;
 
 namespace RSA_v1
 {
@@ -90,10 +91,8 @@ namespace RSA_v1
             int n = q * p;
             int E = int.Parse(textBox3.Text);
             int P = int.Parse(textBox5.Text);
-            double s = Math.Pow(P, E);
-            double c = s % n;
-            richTextBox4.Text = "Зашифрованое собщение  " + c;
-           
+            BigInteger numeric = P;
+            richTextBox4.Text = "Зашифрованое собщение  " + BigInteger.Pow(P, E) % n ;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -101,11 +100,10 @@ namespace RSA_v1
             int q = int.Parse(textBox1.Text);
             int p = int.Parse(textBox2.Text);
             int n = q * p;
-            int c = int.Parse(textBox5.Text);
+            int c = int.Parse(textBox6.Text);
             int d = int.Parse(textBox4.Text);
-            double s = Math.Pow(c, d);
-            double f = s % n;
-            richTextBox5.Text = "Расшифрованое собщение  " + c;
+            richTextBox5.Text = "Расшифрованое собщение  " + BigInteger.Pow(c, d) % n; ;
         }
+
     }
 }
