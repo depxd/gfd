@@ -46,7 +46,7 @@ namespace RSA_v1
             }
             if (prost)
             {
-                richTextBox2.Text = "Открытый ключ " + E + "," + n;
+                richTextBox2.Text = "Открытый ключ " + "\n" + "(" + E + ", " + n + ")";
             }
             else 
             {
@@ -61,19 +61,23 @@ namespace RSA_v1
             int fi = (q - 1) * (p - 1);
             //int d = int.Parse(textBox4.Text);
             int E = int.Parse(textBox3.Text);
-            for (int h = 1; h <= 3; h++)
+            
+            for (int h = 1; h <= 5; h++)
             {
                 int i = E + fi * h;
                 int k = (i * E) % fi;
                 if (k == 1)
                 {
-                    richTextBox3.Text = "Закрытый ключ " + i + ", " + n;
+                    richTextBox3.Text += " \n " + "Закрытый ключ " + " \n " + "(" + i + ", " + n + ")";
+                    textBox7.Text += Environment.NewLine + " d = " + "\n" + i ;
                 }
                 else
                 {
-                    richTextBox3.Text = "Неверное число d";
-                }              
-            }        
+                    richTextBox3.Text = "Неверное число d" ;
+                }
+            }
+
+
         }
         private void button4_Click(object sender, EventArgs e)
         {
