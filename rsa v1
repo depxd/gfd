@@ -34,23 +34,45 @@ namespace RSA_v1
             int q = int.Parse(textBox1.Text);
             int p = int.Parse(textBox2.Text);
             int n = q * p;
-            int E = int.Parse(textBox3.Text);
-            bool prost = true;
-            for (int i = 2; i <= E / 2; i++)
+            int fi = (q - 1) * (p - 1);
+            bool b = true;
+            for (int E = 2; E <= fi; E++)
             {
-                if (E % i == 0)
+                int h = (E * E) % fi;
+                if (h == 1)
                 {
-                    prost = false;
-                    break;
+                    Console.Read();
                 }
-            }
-            if (prost)
-            {
-                richTextBox2.Text = "Открытый ключ " + "\n" + "(" + E + ", " + n + ")";
-            }
-            else 
-            {
-                richTextBox2.Text = "Число не простое";
+                for (int i = 2; i <= E; i++)
+                {
+                    if (IsPrime(E))
+                    {
+                        int s = (E * E) % fi;
+                        if (s == 1)
+                        {
+                            textBox3.Text = Environment.NewLine + E; 
+                            richTextBox2.Text = "Открытый ключ " + "\n" + "(" + E + ", " + n + ")";                            
+                        }
+                    }
+                }
+                //int E = int.Parse(textBox3.Text);
+                //bool prost = true;
+                //for (int i = 2; i <= E / 2; i++)
+                //{
+                //    if (E % i == 0)
+                //    {
+                //        prost = false;
+                //        break;
+                //    }
+                //}
+                //if (prost)
+                //{
+                //    richTextBox2.Text = "Открытый ключ " + "\n" + "(" + E + ", " + n + ")";
+                //}
+                //else 
+                //{
+                //    richTextBox2.Text = "Число не простое";
+                //}
             }
         }
         private async void button3_Click(object sender, EventArgs e)
@@ -59,25 +81,21 @@ namespace RSA_v1
             int p = int.Parse(textBox2.Text);
             int n = q * p;
             int fi = (q - 1) * (p - 1);
-            //int d = int.Parse(textBox4.Text);
-            int E = int.Parse(textBox3.Text);
-            
+            int E = int.Parse(textBox3.Text);            
             for (int h = 1; h <= 5; h++)
             {
                 int i = E + fi * h;
                 int k = (i * E) % fi;
                 if (k == 1)
                 {
-                    richTextBox3.Text += " \n " + "Закрытый ключ " + " \n " + "(" + i + ", " + n + ")";
-                    textBox7.Text += Environment.NewLine + " d = " + "\n" + i ;
+                    richTextBox6.Text += "\n" + " d = " + i;
+                    richTextBox3.Text += " \n " + "Закрытый ключ " + " \n " + "(" + i + ", " + n + ")";    
                 }
                 else
                 {
                     richTextBox3.Text = "Неверное число d" ;
                 }
             }
-
-
         }
         private void button4_Click(object sender, EventArgs e)
         {
@@ -99,7 +117,15 @@ namespace RSA_v1
         }
         private void label6_Click(object sender, EventArgs e)
         {
-
+        }
+        static bool IsPrime(int E)
+        {
+            for (int i = 2; i < E; i++)
+            {
+                if (E % i == 0 && i != E)
+                    return false;
+            }
+            return true;
         }
     }
 }
